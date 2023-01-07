@@ -10,13 +10,14 @@ group_add = "ADD GROUP ➕"
 group_delete = "DELETE GROUP ⛔"
 group_view = "VIEW GROUPS 🙈"
 group_menu_clicked = "Here you can manage the groups or channels in the database"
-group_username = "To add a group/channel, send me the username of the group or channel starting with @. Note "\
-                 "that you must add me in the group as admin"
+group_username = "To add a group/channel, send me the username of the group or channel starting with @."\
+                 " To add a private group or channel, send the channel or group ID number. Note "\
+                 "that you must add me in the group or channel as admin"
 group_delete_info = "Select any group to delete"
 group_not_found = "Sorry I couldn't find that group"
 group_admin_error = "I am not an admin in that group!"
 group_add_ok = "The group was added successfully"
-group_not_available = "There are no groups available in the database"
+group_not_available = "There are no groups/channels available in the database"
 group_not_managed = "That group is not managed by me!"
 group_deleted = "Group deleted ⛔"
 groups_intro = "Groups available: \n"

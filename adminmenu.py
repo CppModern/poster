@@ -316,7 +316,7 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
 
         #  Post confirmation
         duration = selection.data
-        selection.edit_message_text(
+        log = selection.edit_message_text(
             worker.loc.get("confirm_info")
         )
         try:
@@ -396,6 +396,7 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
         )
         selection = worker.wait_for_inlinekeyboard_callback(cancellable=True)
         if selection.data == "cmd_cancel":
+            log.delete()
             msg.delete()
             return postmenu(worker, selection)
         data = {"content": text, "user_id": worker.telegram_user.id, "duration": duration, "groups": groups}
@@ -404,8 +405,8 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
             data["media_type"] = media_type
         if hasbutt:
             data["button"] = pbutt
+        log.delete()
         msg.delete()
-
         worker.add_post(data)
         selection.edit_message_text(
             worker.loc.get("post_add_ok"),

@@ -100,7 +100,7 @@ def wait_for_regex(
                 )
             continue
         # Return the first capture group
-        return match.group(1)
+        return update.message.text_markdown
 
 
 def wait_for_precheckoutquery(

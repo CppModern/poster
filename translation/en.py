@@ -30,8 +30,8 @@ newPost = "NEW POST"
 myPost = "MY POST"
 post_groups = "Select the group to post"
 post_media = "Send media (video, photo, gif) to attach to this post"
-post_buttons = "Send the buttons to attach to this post. Press Skip if no buttons. Format:\n "\
-               "Name1 Link1\nName2 Link2"
+post_buttons = "Send the buttons to attach to this post. Press Skip if no buttons. Format:\n"\
+               "Name1 | Link1\nName2 | Link2"
 confirm_info = "Here is how the post will appear"
 confirm_prompt = "Do you want to add this post?"
 confirm = "Confirm ✅"

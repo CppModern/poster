@@ -270,7 +270,7 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
                     return postmenu(worker, selection.callback_query)
                 break
             raw = selection.split("\n")
-            if not all([len(i.split(" ")) == 2 for i in raw]):
+            if not all([len(i.split("|")) == 2 for i in raw]):
                 worker.bot.send_message(
                     worker.chat.id,
                     worker.loc.get("post_buttons"),
@@ -283,15 +283,15 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
             pbutt = ""
             blist = []
             for line in raw:
-                line = line.split(" ")
+                line = line.split("|")
                 link = line[1].strip()
                 if not link.startswith("https") or not link.startswith("http"):
                     continue
                 blist.append(
                     [InlineKeyboardButton(line[0], url=link)]
                 )
-                text, url = line
-                line = f"{text}|{url}"
+                disp, url = line
+                line = f"{disp}|{url}"
                 pbutt += line + " "
             pbutt = pbutt.strip()
         # Post duration

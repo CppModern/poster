@@ -33,7 +33,12 @@ def poster(duration):
             for each in buttons:
                 each: str
                 each = each.split("|")
-                disp, url = each
+                try:
+                    disp, url = each
+                except ValueError as e:
+                    print(f"{each=},  {e}")
+                    button = ""
+                    continue
                 blist.append(
                     [InlineKeyboardButton(disp, url=url)]
                 )

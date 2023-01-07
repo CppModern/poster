@@ -14,6 +14,7 @@ try:
     import coloredlogs
 except ImportError:
     coloredlogs = None
+MARKDOWN = telegram.parsemode.ParseMode.MARKDOWN
 
 
 def poster(duration):
@@ -66,18 +67,21 @@ def poster(duration):
                                 group,
                                 photo=media,
                                 caption=text,
+                                parse_mode=MARKDOWN
                             )
                         elif media_type == 1:
                             bot.send_video(
                                 group,
                                 video=media,
                                 caption=text,
+                                parse_mode=MARKDOWN
                             )
                         elif media_type == 2:
                             send_animation(
                                 group,
                                 animation=media,
                                 caption=text,
+                                parse_mode=MARKDOWN
                             )
                     else:
                         # Posts with buttons
@@ -86,21 +90,24 @@ def poster(duration):
                                 group,
                                 photo=media,
                                 caption=text,
-                                reply_markup=InlineKeyboardMarkup(blist)
+                                reply_markup=InlineKeyboardMarkup(blist),
+                                parse_mode=MARKDOWN
                             )
                         elif media_type == 1:
                             bot.send_video(
                                 group,
                                 video=media,
                                 caption=text,
-                                reply_markup=InlineKeyboardMarkup(blist)
+                                reply_markup=InlineKeyboardMarkup(blist),
+                                parse_mode=MARKDOWN
                             )
                         elif media_type == 2:
                             send_animation(
                                 group,
                                 animation=media,
                                 caption=text,
-                                reply_markup=InlineKeyboardMarkup(blist)
+                                reply_markup=InlineKeyboardMarkup(blist),
+                                parse_mode=MARKDOWN
                             )
                 except Exception as e:
                     print(e)

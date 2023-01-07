@@ -65,7 +65,7 @@ def wait_for_specific_message(
 
 
 def wait_for_regex(
-        worker, regex: str, cancellable: bool = False, info=None
+        worker, regex: str, cancellable: bool = False, info=None, mark=False
 ) -> Union[str, CancelSignal]:
     """Continue getting updates until the regex finds a match in a message, then return the first capture group."""
     log.debug("Waiting for a regex...")
@@ -100,7 +100,9 @@ def wait_for_regex(
                 )
             continue
         # Return the first capture group
-        return update.message.text_markdown
+        if mark:
+            return update.message.text_markdown
+        return match.group(1)
 
 
 def wait_for_precheckoutquery(

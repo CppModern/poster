@@ -44,9 +44,9 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
             reply_markup=worker.cancel_marked,
             parse_mode=telegram.ParseMode.MARKDOWN
         )
-        selection = worker.wait_for_regex("(.*)")
+        selection = worker.wait_for_regex("(.*)", cancellable=True)
         if isinstance(selection, telegram.Update):
-            return group_menu(worker, selection=selection.callback_query)
+            return worker.admin_group_menu(selection=selection.callback_query)
         try:
             admins = worker.bot.getChatAdministrators(selection)
         except telegram.error.BadRequest as e:
@@ -186,10 +186,10 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
             reply_markup=worker.cancel_marked,
             parse_mode=MARKDOWN
         )
-        selection = worker.wait_for_regex("(.*)", cancellable=True)
+        selection = worker.wait_for_regex("(.*)", cancellable=True, mark=True)
         if isinstance(selection, telegram.Update):
             return postmenu(worker, selection.callback_query)
-        text = selection
+        text = selection.replace("_", "__").replace("*", "**")
         gdata = {}
         for group in groups:
             gdata[group["group_id"]] = group["group_title"]

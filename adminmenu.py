@@ -424,7 +424,10 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
             media = post["media"]
             text = post["content"]
             pk = post["pk"]
-            butt = utils.buildmenubutton({f"delete_{pk}": worker.loc.get("delete_post")})
+            butt = utils.buildmenubutton(
+                {f"delete_{pk}": worker.loc.get("delete_post")},
+                cancellable=False
+            )
             if not media:
                 worker.bot.send_message(
                     worker.chat.id,

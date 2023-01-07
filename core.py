@@ -33,9 +33,9 @@ def poster(duration):
             for each in buttons:
                 each: str
                 each = each.split("|")
-                text, url = each
+                disp, url = each
                 blist.append(
-                    [InlineKeyboardButton(text, url=url)]
+                    [InlineKeyboardButton(disp, url=url)]
                 )
         groups: str = post["groups"]
         groups = groups.split(" ")

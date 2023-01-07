@@ -189,7 +189,7 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
         selection = worker.wait_for_regex("(.*)", cancellable=True, mark=True)
         if isinstance(selection, telegram.Update):
             return postmenu(worker, selection.callback_query)
-        text = selection.replace("_", "__").replace("*", "**")
+        text = selection
         gdata = {}
         for group in groups:
             gdata[group["group_id"]] = group["group_title"]
@@ -336,21 +336,24 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
                             worker.chat.id,
                             photo=media,
                             caption=text,
-                            reply_markup=InlineKeyboardMarkup(blist)
+                            reply_markup=InlineKeyboardMarkup(blist),
+                            parse_mode=MARKDOWN
                         )
                     elif media_type == 1:
                         msg = worker.bot.send_video(
                             worker.chat.id,
                             video=media,
                             caption=text,
-                            reply_markup=InlineKeyboardMarkup(blist)
+                            reply_markup=InlineKeyboardMarkup(blist),
+                            parse_mode=MARKDOWN
                         )
                     elif media_type == 2:
                         msg = worker.bot.send_animation(
                             worker.chat.id,
                             animation=media,
                             caption=text,
-                            reply_markup=InlineKeyboardMarkup(blist)
+                            reply_markup=InlineKeyboardMarkup(blist),
+                            parse_mode=MARKDOWN
                         )
                 else:
                     if media_type == 0:
@@ -358,18 +361,21 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
                             worker.chat.id,
                             photo=media,
                             caption=text,
+                            parse_mode=MARKDOWN
                         )
                     elif media_type == 1:
                         msg = worker.bot.send_video(
                             worker.chat.id,
                             video=media,
                             caption=text,
+                            parse_mode=MARKDOWN
                         )
                     elif media_type == 2:
                         msg = worker.bot.send_animation(
                             worker.chat.id,
                             animation=media,
                             caption=text,
+                            parse_mode=MARKDOWN
                         )
         except Exception as e:
             print(e)

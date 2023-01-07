@@ -151,7 +151,7 @@ class Worker(threading.Thread):
             )
         else:
             selection.edit_message_text(
-                self.loc.get("welcome").format(name=self.telegram_user.first_name),
+                self.loc.get("welcome").format(self.telegram_user.first_name),
                 reply_markup=telegram.InlineKeyboardMarkup(
                     buttons
                 ),
@@ -168,7 +168,7 @@ class Worker(threading.Thread):
             self.switch_context(selection=selection)
 
     def switch_context(self, selection: telegram.CallbackQuery = None):
-        if self.loc.code:
+        if self.loc.code != "en":
             data = {
                 "en": "English 🇱🇷"
             }

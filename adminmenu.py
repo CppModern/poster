@@ -284,14 +284,15 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
             blist = []
             for line in raw:
                 line = line.split("|")
+                disp = line[0].strip()
                 link = line[1].strip()
                 if not link.startswith("https") or not link.startswith("http"):
                     continue
                 blist.append(
-                    [InlineKeyboardButton(line[0], url=link)]
+                    [InlineKeyboardButton(disp, url=link)]
                 )
-                disp, url = line
-                line = f"{disp}|{url}"
+
+                line = f"{disp}|{link}"
                 pbutt += line + " "
             pbutt = pbutt.strip()
         # Post duration

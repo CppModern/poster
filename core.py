@@ -29,7 +29,6 @@ def poster(duration):
         button = post["buttons"].strip()
         if button:
             buttons = button.split(" ")
-            assert isinstance(buttons, list)
             blist = []
             for each in buttons:
                 each: str

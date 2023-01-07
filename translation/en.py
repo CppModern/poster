@@ -1,7 +1,9 @@
 # core
+language_button = "Language 🌐"
+langPrompt = "Choose your preferred language"
 menu_cancel = "🔙 Cancel"
 menu_done = "DONE"
-welcome = "**Welcome {name}. You're the manager!\nI am here to serve, What would you "\
+welcome = "**Welcome {}. You're the manager!\nI am here to serve, What would you "\
           "like to do?**"
 critical = "Error Occurred while processing your post data"
 # group management

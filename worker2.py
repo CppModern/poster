@@ -132,7 +132,8 @@ class Worker(threading.Thread):
             data = {
                 "group": self.loc.get("group_button"),
                 "post": self.loc.get("post_button"),
-                "promote": self.loc.get("admin_button")
+                "promote": self.loc.get("admin_button"),
+                "lang": self.loc.get("language_button")
             }
         elif self.special:
             data = {
@@ -143,7 +144,7 @@ class Worker(threading.Thread):
         if not selection:
             self.bot.send_message(
                 self.chat.id,
-                text=self.loc.get("welcome").format(name=self.telegram_user.first_name),
+                text=self.loc.get("welcome").format(self.telegram_user.first_name),
                 reply_markup=telegram.InlineKeyboardMarkup(
                     buttons
                 ),
@@ -163,8 +164,10 @@ class Worker(threading.Thread):
             self.admin_group_menu(selection=selection)
         elif selection.data == "promote":
             self.admin_promote_menu(selection=selection)
+        elif selection.data == "lang":
+            self.switch_context(selection=selection)
 
-    def switch_context(self, selection: telegram.CallbackQuery = None, toadmin=True):
+    def switch_context(self, selection: telegram.CallbackQuery = None):
         if self.loc.code:
             data = {
                 "en": "English 🇱🇷"
@@ -181,13 +184,9 @@ class Worker(threading.Thread):
         )
         selection = self.wait_for_inlinekeyboard_callback(cancellable=True)
         if selection.data == "cmd_cancel":
-            if toadmin:
-                return self.admin_menu(selection)
-            return self.user_menu(selection)
-        self.loc = localization.Localization(selection.data)
-        if toadmin:
             return self.admin_menu(selection)
-        return self.user_menu(selection)
+        self.loc = localisation.Localisation(selection.data)
+        return self.admin_menu(selection)
 
     def get_orders(self):
         url = self.cfg["API"]["base"].format(f"payment/orders/{self.telegram_user.id}/")

@@ -9,8 +9,8 @@ group_button = "GROUPS"
 group_add = "ADD GROUP ➕"
 group_delete = "DELETE GROUP ⛔"
 group_view = "VIEW GROUPS 🙈"
-group_menu_clicked = "Here you can manage the groups in the database"
-group_username = "To add a group, send me the username of the group starting with @. Note "\
+group_menu_clicked = "Here you can manage the groups or channels in the database"
+group_username = "To add a group/channel, send me the username of the group or channel starting with @. Note "\
                  "that you must add me in the group as admin"
 group_delete_info = "Select any group to delete"
 group_not_found = "Sorry I couldn't find that group"

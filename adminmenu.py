@@ -44,7 +44,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
             reply_markup=worker.cancel_marked,
             parse_mode=telegram.ParseMode.MARKDOWN
         )
-        selection = worker.wait_for_regex("(.*)", cancellable=True)
+        selection = worker.wait_for_regex("(.+)", cancellable=True)
         if isinstance(selection, telegram.Update):
             return worker.admin_group_menu(selection=selection.callback_query)
         try:
@@ -71,6 +71,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
             return group_menu(worker)
         info = worker.bot.getChat(selection)
         group_id, group_title = info["id"], info["title"]
+        print(f"ID {group_id}")
         data = {"group_id": group_id, "group_title": group_title}
         worker.add_group(data)
 

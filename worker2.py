@@ -139,6 +139,7 @@ class Worker(threading.Thread):
             data = {
                 "group": self.loc.get("group_button"),
                 "post": self.loc.get("post_button"),
+                "lang": self.loc.get("language_button")
             }
         buttons = buildmenubutton(data, cancellable=False)
         if not selection:

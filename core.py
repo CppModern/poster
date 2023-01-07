@@ -28,7 +28,7 @@ def poster(duration):
         text = post["content"]
         button = post["buttons"].strip()
         if button:
-            buttons = button.split(" ")
+            buttons = button.split("<>")
             blist = []
             for each in buttons:
                 each: str

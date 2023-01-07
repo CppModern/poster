@@ -293,7 +293,8 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
                 )
 
                 line = f"{disp}|{link}"
-                pbutt += line + " "
+                pbutt += line + "<>"
+            pbutt = pbutt.rsplit("<>", 1)[0]
             pbutt = pbutt.strip()
         # Post duration
         data = {
@@ -437,21 +438,24 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
                         worker.chat.id,
                         photo=media,
                         caption=text,
-                        reply_markup=InlineKeyboardMarkup(butt)
+                        reply_markup=InlineKeyboardMarkup(butt),
+                        parse_mode=MARKDOWN
                     )
                 elif media_type == 1:
                     worker.bot.send_video(
                         worker.chat.id,
                         video=media,
                         caption=text,
-                        reply_markup=InlineKeyboardMarkup(butt)
+                        reply_markup=InlineKeyboardMarkup(butt),
+                        parse_mode=MARKDOWN
                     )
                 elif media_type == 2:
                     worker.bot.send_animation(
                         worker.chat.id,
                         animation=media,
                         caption=text,
-                        reply_markup=InlineKeyboardMarkup(butt)
+                        reply_markup=InlineKeyboardMarkup(butt),
+                        parse_mode=MARKDOWN
                     )
         return worker.admin_menu()
 

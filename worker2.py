@@ -299,11 +299,8 @@ class Worker(threading.Thread):
         res = requests.post(url, data=data).json()
         return res
 
-    def get_user_groups(self, user_id):
-        if user_id:
-            url = self.cfg["API"]["base"].format(f"payment/groups/{user_id}")
-        else:
-            url = self.cfg["API"]["base"].format(f"payment/groups/{self.telegram_user.id}")
+    def get_user_groups(self):
+        url = self.cfg["API"]["base"].format(f"payment/groups/{self.telegram_user.id}")
         res = requests.get(url).json()
         return res["groups"]
 

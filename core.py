@@ -134,6 +134,18 @@ def onehour():
     poster("onehour")
 
 
+def onethirty():
+    poster("onethirty")
+
+
+def twohours():
+    poster("twohours")
+
+
+def threehours():
+    poster("threehours")
+
+
 def main():
     """The core code of the program. Should be run only in the main process!"""
     # Rename the main thread for presentation purposes
@@ -144,6 +156,10 @@ def main():
     scheduler.add_job(tenmin, trigger="interval", minutes=10)
     scheduler.add_job(thirtymin, trigger="interval", minutes=30)
     scheduler.add_job(onehour, trigger="interval", minutes=60)
+    scheduler.add_job(onethirty, trigger="interval", minutes=90)
+    scheduler.add_job(twohours, trigger="interval", minutes=120)
+    scheduler.add_job(threehours, trigger="interval", minutes=180)
+
     scheduler.start()
     # Start logging setup
     log = logging.getLogger("core")

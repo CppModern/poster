@@ -72,7 +72,8 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
         info = worker.bot.getChat(selection)
         group_id, group_title = info["id"], info["title"]
         print(f"ID {group_id}")
-        data = {"group_id": group_id, "group_title": group_title}
+        owner = worker.telegram_user.id
+        data = {"group_id": group_id, "group_title": group_title, "owner": owner}
         worker.add_group(data)
 
         worker.bot.send_message(
@@ -81,7 +82,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
         )
         return group_menu(worker)
     elif selection.data == view:
-        groups = worker.get_groups()
+        groups = worker.get_user_groups()
         if not groups:
             selection.edit_message_text(
                 worker.loc.get("group_not_available"),
@@ -95,14 +96,15 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
                 continue
             try:
                 group_json = worker.bot.getChat(group["group_id"])
-                print(group_json)
             except Exception:
                 worker.delete_group(group["group_id"])
                 continue
             found = True
             username = group_json["username"]
+            link = group_json.get("invite_link")
+            username = link or f"https://t.me/{username}"
             title = group_json["title"]
-            info = f"[{title}](https://t.me/{username}) \n\n"
+            info = f"[{title}]({username}) \n\n"
             msg = msg + info
         if not found:
             selection.edit_message_text(
@@ -116,7 +118,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
         )
         return group_menu(worker)
     elif selection.data == delete:
-        groups = worker.get_groups()
+        groups = worker.get_user_groups()
         if not groups:
             selection.edit_message_text(
                 worker.loc.get("group_not_available"),
@@ -170,7 +172,7 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
                 worker.loc.get("post_insufficient_balance_or_slots")
             )
             return postmenu(worker)"""
-        groups = worker.get_groups()
+        groups = worker.get_user_groups()
 
         if not groups:
             if selection:
@@ -303,7 +305,10 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
             "fivemin": worker.loc.get("fivemin"),
             "tenmin": worker.loc.get("tenmin"),
             "thirtymin": worker.loc.get("thirtymin"),
-            "onehour": worker.loc.get("onehour")
+            "onehour": worker.loc.get("onehour"),
+            "onethirty": worker.loc.get("onethirty"),
+            "twohours": worker.loc.get("twohours"),
+            "threehours": worker.loc.get("threehours")
         }
         durbuttons = utils.buildmenubutton(data)
         worker.bot.send_message(

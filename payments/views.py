@@ -163,8 +163,11 @@ def add_group(request: http.HttpRequest):
         return JsonResponse({"error": "method not allowed"})
     group_id = request.POST.get("group_id")
     group_title = request.POST.get("group_title")
+    owner = request.POST.get("owner")
     try:
-        group: TelegramGroup = TelegramGroup.objects.create(group_title=group_title, group_id=group_id)
+        group: TelegramGroup = TelegramGroup.objects.create(
+            group_title=group_title, group_id=group_id, owner=owner
+        )
     except Exception as e:
         print(f"Error in adding group: {e}")
         return JsonResponse({"error": f"{e}"})
@@ -200,13 +203,10 @@ def delete_group(request: http.HttpRequest):
 def get_user_groups(request: http.HttpRequest, user_id):
     if request.method != "GET":
         return JsonResponse({"error": "method not allowed"})
-    user: MyUser = MyUser.objects.get(telegram_id=user_id)
-    permit_group: list[GroupPermitted] = user.groups.all()
-    if not permit_group:
-        return JsonResponse({"groups": []})
-    permit_group = permit_group[0]
     attrs = ["group_id", "group_title"]
-    groups: list[TelegramGroup] = permit_group.group.all()
+    groups: list[TelegramGroup] = TelegramGroup.objects.filter(
+        owner=user_id
+    )
     data = []
     for group in groups:
         info = {attr: getattr(group, attr) for attr in attrs}
@@ -318,6 +318,11 @@ def ban_user(request: http.HttpRequest):
         user: MyUser = MyUser.objects.get(telegram_id=pk)
     except Exception:
         return JsonResponse({"error": "user not exists"})
+    groups: list[TelegramGroup] = TelegramGroup.objects.get(
+        owner=user.telegram_id
+    )
+    for group in groups:
+        group.delete()
     user.delete()
     return JsonResponse({"msg": "OK"})
 

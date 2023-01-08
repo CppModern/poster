@@ -1,6 +1,6 @@
 [Telegram]
 token = "5951696454:AAGg_dbNcyvHZ3ikIJN-JyoKT-rdO4_nvAA"
-# token = "5609929825:AAHLFFw_KytBWPDAvRPTNlb2exPJ1OhjtD4"
+# token = "5976854812:AAG4aE5fcZoDY46lLgVwj5UV5XnDfailtWE"
 # Time in seconds before a conversation (thread) with no new messages expires
 # A lower value reduces memory usage, but can be inconvenient for the users
 conversation_timeout = 1000

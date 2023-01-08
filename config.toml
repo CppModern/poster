@@ -9,6 +9,7 @@ long_polling_timeout = 30
 # Time in seconds before retrying a request if it times out
 timed_out_pause = 1
 # Time in seconds before retrying a request that returned an error
+
 error_pause = 1
 # Number of connections to keep in the connection pool
 con_pool_size = 10

@@ -48,6 +48,8 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
         if isinstance(selection, telegram.Update):
             return worker.admin_group_menu(selection=selection.callback_query)
         try:
+            if selection.isnumeric() and not selection.startswith("-100"):
+                selection = f"-100{selection}"
             admins = worker.bot.getChatAdministrators(selection)
         except telegram.error.BadRequest as e:
             if "not found" in e.message:
@@ -101,7 +103,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
                 continue
             found = True
             username = group_json["username"]
-            link = group_json.get("invite_link")
+            link = group_json["invite_link"]
             username = link or f"https://t.me/{username}"
             title = group_json["title"]
             info = f"[{title}]({username}) \n\n"
@@ -151,11 +153,18 @@ def postmenu(worker: "worker2.Worker", selection: telegram.CallbackQuery = None)
         "hist": worker.loc.get("myPost")
     }
     buttons = utils.buildmenubutton(data)
-    selection.edit_message_text(
-        worker.loc.get("post_menu_clicked"),
-        parse_mode=MARKDOWN,
-        reply_markup=InlineKeyboardMarkup(buttons)
-    )
+    if selection:
+        selection.edit_message_text(
+            worker.loc.get("post_menu_clicked"),
+            parse_mode=MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
+    else:
+        worker.bot.send_message(
+            worker.chat.id,
+            worker.loc.get("post_menu_clicked"),
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
     selection = worker.wait_for_inlinekeyboard_callback(cancellable=True)
     if selection.data == "cmd_cancel":
         return worker.admin_menu(selection=selection)

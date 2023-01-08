@@ -95,6 +95,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
                 continue
             try:
                 group_json = worker.bot.getChat(group["group_id"])
+                print(group_json)
             except Exception:
                 worker.delete_group(group["group_id"])
                 continue

@@ -321,7 +321,7 @@ def ban_user(request: http.HttpRequest):
         user: MyUser = MyUser.objects.get(telegram_id=pk)
     except Exception:
         return JsonResponse({"error": "user not exists"})
-    groups: list[TelegramGroup] = TelegramGroup.objects.get(
+    groups: list[TelegramGroup] = TelegramGroup.objects.filter(
         owner=user.telegram_id
     )
     for group in groups:

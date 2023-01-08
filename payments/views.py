@@ -208,7 +208,10 @@ def get_user_groups(request: http.HttpRequest, user_id):
         owner=user_id
     )
     data = []
+    found = set()
     for group in groups:
+        if group.group_id in found:
+            continue
         info = {attr: getattr(group, attr) for attr in attrs}
         data.append(info)
     return JsonResponse({"groups": data})

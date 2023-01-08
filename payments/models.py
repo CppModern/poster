@@ -61,7 +61,7 @@ class Transaction(models.Model):
 
 
 class TelegramGroup(models.Model):
-    group_id = models.CharField(max_length=200, primary_key=True)
+    group_id = models.CharField(max_length=200)
     group_title = models.CharField(max_length=200)
     owner = models.CharField(max_length=1000, default=str)
 

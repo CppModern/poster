@@ -73,7 +73,7 @@ def group_menu(worker: "worker2.Worker", selection: telegram.CallbackQuery = Non
         group_id, group_title = info["id"], info["title"]
         print(f"ID {group_id}")
         owner = worker.telegram_user.id
-        data = {"group_id": group_id, "group_title": group_title, "owner": owner}
+        data = {"group_id": group_id, "group_title": group_title, "owner": f"{owner}"}
         worker.add_group(data)
 
         worker.bot.send_message(

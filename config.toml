@@ -16,7 +16,7 @@ con_pool_size = 10
 
 
 [API]
-base = "http://127.0.0.1:8000/{}"
+base = "http://127.0.0.1:8200/{}"
 
 [Language]
 enabled_languages = "en"

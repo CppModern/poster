@@ -6,9 +6,9 @@ menu_done = "DONE"
 welcome = "**Welcome {}. You're the manager!\nI am here to serve, What would you "\
           "like to do?**"
 critical = "Error Occurred while processing your post data"
-contact = "Developer"
+contact = "Developer 🛠️"
 # group management
-group_button = "GROUPS"
+group_button = "GROUPS 📢"
 group_add = "ADD GROUP ➕"
 group_delete = "DELETE GROUP ⛔"
 group_view = "VIEW GROUPS 🙈"
@@ -28,10 +28,10 @@ groups_intro = "Groups available: \n"
 
 #
 post_menu_clicked = "Posting area"
-post_button = "POST"
+post_button = "POST 📝"
 post_text = "Enter the post text"
-newPost = "NEW POST"
-myPost = "MY POST"
+newPost = "NEW POST ✍️"
+myPost = "MY POST ♻️"
 post_groups = "Select the group to post"
 post_media = "Send media (video, photo, gif) to attach to this post"
 post_buttons = "Send the buttons to attach to this post. Press Skip if no buttons. Format:\n"\

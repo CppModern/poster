@@ -91,6 +91,11 @@ class Worker(threading.Thread):
             self.admin = user["admin"]
             if self.special or self.admin:
                 self.admin_menu()
+            else:
+                self.bot.send_message(
+                    "If you need me to handle your posts publications please contact my "
+                    "[Developer](https://t.me/frozymelon)"
+                )
 
         except Exception as e:
             # Try to notify the user of the exception
@@ -142,6 +147,12 @@ class Worker(threading.Thread):
                 "lang": self.loc.get("language_button")
             }
         buttons = buildmenubutton(data, cancellable=False)
+        if self.special:
+            buttons.append(
+                [telegram.InlineKeyboardButton(
+                    self.loc.get("contact",), url="https://t.me/frozymelon"
+                )]
+            )
         if not selection:
             self.bot.send_message(
                 self.chat.id,

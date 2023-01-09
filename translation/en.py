@@ -6,6 +6,7 @@ menu_done = "DONE"
 welcome = "**Welcome {}. You're the manager!\nI am here to serve, What would you "\
           "like to do?**"
 critical = "Error Occurred while processing your post data"
+contact = "Developer"
 # group management
 group_button = "GROUPS"
 group_add = "ADD GROUP ➕"

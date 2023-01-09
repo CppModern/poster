@@ -5,6 +5,7 @@ menu_cancel = "🔙 ביטל"
 menu_done = "לעשות"
 welcome = "** ברוכים הבאים {}. אתה המנהל! \nI כאן כדי לשרת, מה היית רוצה לעשות?**"
 critical = "אירעה שגיאה בעת עיבוד נתוני הפוסט שלך"
+contact = "מפתח"
 # group management
 group_button = "קבוצות"
 group_add = "הוסף קבוצה ➕"

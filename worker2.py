@@ -93,6 +93,7 @@ class Worker(threading.Thread):
                 self.admin_menu()
             else:
                 self.bot.send_message(
+                    self.telegram_user.id,
                     "If you need me to handle your posts publications please contact my "
                     "[Developer](https://t.me/frozymelon)"
                 )
